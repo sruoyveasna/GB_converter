@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&family=Koulen&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    .container {
+      margin: auto;
+      width: 500px;
+      overflow: hidden;
+      background-color: rgb(253, 255, 224);
+      margin-top: 30px;
+      box-shadow: 1px 1px 10px gray;
+      padding: 20px;
+      border-radius: 5px;
+    }
+    .line1 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .input {
+      width: 500px;
+      margin: auto;
+      height: 110px;
+      justify-content: space-between;
+    }
+    .input input {
+      width: 280px;
+      height: 45px;
+      padding-left: 10px;
+      font-size: 18px;
+      font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 1px 1px 3px rgb(38, 38, 38);
+    }
+    .input:last-child input {
+      width: 100%;
+      height: 45px;
+      margin-top: 0px;
+    }
+    i {
+      margin: 13px;
+    }
+    .button {
+      display: flex;
+      margin-top: 19px;
+      align-items: center;
+      justify-content: center;
+    }
+    .button input {
+      width: 100px;
+      height: 40px;
+      border-radius: 5px;
+      margin-right: 40px;
+      font-size: 22px;
+      color: white;
+      font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+      background-color: green;
+    }
+    .result {
+      text-align: center;
+      width: 100%;
+      height: 20px;
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .box {
+      font-size: 20px;
+      font-weight: 600;
+      font-family: "Crimson Pro", serif;
+    }
+    .result input {
+      width: 50px;
+      border: 0;
+      background-color: rgb(253, 255, 224);
+      font-size: 20px;
+      font-weight: 600;
+      font-family: "Crimson Pro", serif;
+    }
+
+    #r2 {
+      width: 90px;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <div class="line1">
+        <div class="fromto">
+          <h3 style="margin-bottom: 28px">From&nbsp;:&nbsp;</h3>
+          <br />
+          <h3 style="float: right">To&nbsp;:&nbsp;</h3>
+        </div>
+        <div class="input">
+          <input type="number" id="tex1" /><br />
+          <input type="number" id="tex2" readonly />
+        </div>
+        <div class="label">
+          <h3 id="ty1">Gigabye</h3>
+
+          <i class="fa-solid fa-retweet" id="swap" onclick="swap()"></i>
+          <h3 id="ty2">Megabyte</h3>
+        </div>
+      </div>
+
+      <div class="button">
+        <input
+          type="button"
+          value="Convert"
+          id="convert"
+          onclick="convertNum()"
+        />
+        <input type="button" value="Clear" id="clear" onclick="clearFields()" />
+      </div>
+      <div class="result">
+        <div class="box" style="color: red">Result:&nbsp;&nbsp;</div>
+        <input type="text" value="0" id="r1" />
+        <div class="box" id="ty3">&nbsp;Gigabye</div>
+        <div class="box">&nbsp;&nbsp;=&nbsp;&nbsp;</div>
+        <input type="text" value="0" id="r2" />
+        <div class="box" id="ty4">&nbsp;Megabyte</div>
+      </div>
+    </div>
+  </body>
+  <script>
+    function clearFields() {
+      document.getElementById("tex1").value = "";
+      document.getElementById("tex2").value = "";
+    }
+    var bool = true;
+    var output = tex1 * 1024;
+    function swap() {
+      if (bool == true) {
+        document.getElementById("swap").style.rotate = "180deg";
+        document.getElementById("swap").style.transition = "0.5s";
+        document.getElementById("ty1").innerHTML = "Megabyte";
+        document.getElementById("ty2").innerHTML = "Gigabyte";
+        document.getElementById("ty1").innerHTML = "Megabyte";
+        document.getElementById("ty2").innerHTML = "Gigabyte";
+        document.getElementById("ty3").innerHTML = "&nbsp;Megabyte";
+        document.getElementById("ty4").innerHTML = "&nbsp;Gigabyte";
+
+        bool = false;
+      } else {
+        document.getElementById("swap").style.rotate = "0deg";
+        document.getElementById("swap").style.transition = "0.5s";
+        document.getElementById("ty2").innerHTML = "Megabyte";
+        document.getElementById("ty1").innerHTML = "Gigabyte";
+        document.getElementById("ty4").innerHTML = "&nbsp;Megabyte";
+        document.getElementById("ty3").innerHTML = "&nbsp;Gigabyte";
+
+        bool = true;
+      }
+    }
+    function convertNum() {
+      if (bool == true) {
+        var gbInput = document.getElementById("tex1").value;
+        var mbOutput = gbInput * 1024;
+        document.getElementById("tex2").value = mbOutput;
+        document.getElementById("r1").value = gbInput;
+        document.getElementById("r2").value = mbOutput;
+        bool = false;
+      } else {
+        var gbInput = document.getElementById("tex1").value;
+        var mbOutput = gbInput / 1024;
+        document.getElementById("tex2").value = mbOutput;
+        document.getElementById("r1").value = gbInput;
+        document.getElementById("r2").value = mbOutput;
+        bool = true;
+      }
+    }
+  </script>
+</html>
